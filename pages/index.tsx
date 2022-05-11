@@ -10,10 +10,10 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <h1>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+      <main id="main">
+        <div className="container mx-auto py-6">
+          <h1 className="text-3xl font-bold">Hello world!</h1>
+        </div>
       </main>
     </>
   );
