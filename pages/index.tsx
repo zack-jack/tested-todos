@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import AppHeader from "components/AppHeader";
 
 const Home: NextPage = () => {
   return (
@@ -12,7 +13,7 @@ const Home: NextPage = () => {
 
       <main id="main">
         <div className="container mx-auto py-6">
-          <h1 className="text-3xl font-bold">Hello world!</h1>
+          <AppHeader />
         </div>
       </main>
     </>
