@@ -16,5 +16,5 @@ model Todo {
   updatedAt   DateTime @updatedAt()
   description String
   completed   Boolean
-  userId      Int
+  userId      String
 }
