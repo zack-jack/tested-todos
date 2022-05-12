@@ -1,8 +1,11 @@
 import type { NextPage } from "next";
+import { useUser } from "@auth0/nextjs-auth0";
 import Head from "next/head";
 import AppHeader from "components/AppHeader";
 
 const Home: NextPage = () => {
+  const { user } = useUser();
+
   return (
     <>
       <Head>
@@ -12,8 +15,8 @@ const Home: NextPage = () => {
       </Head>
 
       <main id="main">
-        <div className="container mx-auto py-6">
-          <AppHeader />
+        <div className="container py-6 mx-auto">
+          <AppHeader user={user || null} />
         </div>
       </main>
     </>
