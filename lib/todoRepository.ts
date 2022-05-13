@@ -7,9 +7,12 @@ export type TodoResponse = Pick<
 >;
 
 class TodoRepository {
-  async getAll(): Promise<TodoResponse[]> {
+  async getAll(id: string): Promise<TodoResponse[]> {
     try {
       const todos: TodoResponse[] = await prisma.todo.findMany({
+        where: {
+          userId: id,
+        },
         select: {
           id: true,
           description: true,
@@ -55,7 +58,8 @@ class TodoRepository {
 
   async updateCompletedStatus(
     id: number,
-    completed: boolean
+    completed: boolean,
+    userId: string
   ): Promise<TodoResponse | null> {
     try {
       const updatedTodo: Todo = await prisma.todo.update({

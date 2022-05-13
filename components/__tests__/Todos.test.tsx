@@ -9,6 +9,7 @@ test("todos render", async () => {
           id: 1,
           description: "Test",
           completed: false,
+          userId: "1",
         },
       ]}
     />
@@ -31,6 +32,7 @@ test("todo items remaining: 0", async () => {
           id: 1,
           description: "Test",
           completed: true,
+          userId: "1",
         },
       ]}
     />
@@ -47,11 +49,13 @@ test("todo items remaining: 1", async () => {
           id: 1,
           description: "Test1",
           completed: true,
+          userId: "1",
         },
         {
           id: 2,
           description: "Test2",
           completed: false,
+          userId: "1",
         },
       ]}
     />

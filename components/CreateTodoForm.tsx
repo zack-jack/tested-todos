@@ -28,7 +28,7 @@ const CreateTodoForm = () => {
       return;
     }
 
-    const response = await fetch("/api/todo", {
+    const response = await fetch(`/api/todo`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -43,7 +43,7 @@ const CreateTodoForm = () => {
       setFormError("Failed to create todo");
     }
 
-    mutate("/api/todo");
+    mutate(`/api/todos/${user?.sub || ""}`);
     reset();
   };
 

@@ -8,15 +8,9 @@ export default async function handler(
   res: NextApiResponse
 ) {
   switch (req?.method) {
-    case "GET":
-      // Get all todos
-      const todos: TodoResponse[] = await todoRepository.getAll();
-      res.status(200);
-      res.json({ todos });
-      return;
     case "POST":
-      // Create a new todo
       const { description, userId } = req.body;
+      // Create a new todo
       const { success } = createTodoDto.safeParse({
         description,
         userId,

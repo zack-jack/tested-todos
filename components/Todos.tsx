@@ -2,7 +2,12 @@ import * as React from "react";
 import Todo from "components/Todo";
 
 type TodosProps = {
-  todos: { id: number; description: string; completed: boolean }[];
+  todos: {
+    id: number;
+    description: string;
+    completed: boolean;
+    userId: string;
+  }[];
 };
 
 const Todos = ({ todos }: TodosProps): JSX.Element => {
@@ -21,13 +26,14 @@ const Todos = ({ todos }: TodosProps): JSX.Element => {
   return (
     <div className="px-6 mt-10">
       <div className="bg-white rounded-lg shadow-sm dark:bg-gray-800">
-        {todos.map(({ id, description, completed }) => {
+        {todos.map(({ id, description, completed, userId }) => {
           return (
             <Todo
               key={id}
               id={id}
               description={description}
               completed={completed}
+              userId={userId}
             />
           );
         })}

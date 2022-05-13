@@ -8,9 +8,15 @@ type TodoProps = {
   id: number;
   description: string;
   completed: boolean;
+  userId: string;
 };
 
-const Todo = ({ id, description, completed }: TodoProps): JSX.Element => {
+const Todo = ({
+  id,
+  description,
+  completed,
+  userId,
+}: TodoProps): JSX.Element => {
   const handleToggleCompleted = async (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -31,7 +37,7 @@ const Todo = ({ id, description, completed }: TodoProps): JSX.Element => {
       return;
     }
 
-    mutate("/api/todo");
+    mutate(`/api/todos/${userId}`);
   };
 
   const handleDelete = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -42,7 +48,7 @@ const Todo = ({ id, description, completed }: TodoProps): JSX.Element => {
     const { success } = await response.json();
     if (!success) return;
 
-    mutate("/api/todo");
+    mutate(`/api/todos/${userId}`);
   };
 
   const containerClasses = clsx(
