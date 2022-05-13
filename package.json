@@ -12,6 +12,8 @@
     "testdb:migrate": "dotenv -e .env.test -- npx prisma migrate dev --name postgres-init",
     "testdb:up": "docker-compose up -d",
     "testdb:down": "docker-compose down",
+    "e2e": "cypress open",
+    "e2e:headless": "cypress run",
     "studio": "dotenv -e .env.local -- npx prisma studio"
   },
   "prisma": {
@@ -39,6 +41,7 @@
     "@types/react": "18.0.9",
     "@types/react-dom": "18.0.3",
     "autoprefixer": "^10.4.7",
+    "cypress": "^9.6.1",
     "dotenv-cli": "^5.1.0",
     "eslint": "8.15.0",
     "eslint-config-next": "12.1.6",
