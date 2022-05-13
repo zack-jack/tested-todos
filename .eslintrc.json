@@ -1,3 +1,7 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": ["next/core-web-vitals", "plugin:cypress/recommended"],
+  "env": { "cypress/globals": true },
+  "rules": {
+    "jest/expect-expect": "off"
+  }
 }

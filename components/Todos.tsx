@@ -17,8 +17,8 @@ const Todos = ({ todos }: TodosProps): JSX.Element => {
 
   if (!todos?.length) {
     return (
-      <div>
-        <p>No todos</p>
+      <div className="px-6 mt-10">
+        <p className="text-center">No todos</p>
       </div>
     );
   }
