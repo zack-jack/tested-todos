@@ -48,7 +48,7 @@ const CreateTodoForm = () => {
   };
 
   return (
-    <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
+    <form className="px-6" onSubmit={handleSubmit(onSubmit)}>
       <InputText
         label="Create Todo"
         name="createTodo"
@@ -56,10 +56,8 @@ const CreateTodoForm = () => {
         register={register}
         error={errors?.createTodo?.message || ""}
       />
-      {formError && <p>{formError}</p>}
-      <button type="submit" className="mt-6">
-        Submit
-      </button>
+      {formError && <p className="mt-3 error">{formError}</p>}
+      <button className="w-full mt-6 c-btn">Submit</button>
     </form>
   );
 };

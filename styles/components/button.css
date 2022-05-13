@@ -1,0 +1,7 @@
+.c-btn {
+  @apply px-6 py-4;
+  @apply rounded-lg;
+  @apply font-bold text-center text-white;
+  @apply bg-gradient-to-br from-cyan-300 to-fuchsia-300;
+  @apply hover:from-cyan-200 hover:to-fuchsia-200;
+}

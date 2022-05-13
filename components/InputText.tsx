@@ -16,12 +16,17 @@ const InputText = ({
   register,
 }: InputTextProps): JSX.Element => {
   return (
-    <div>
+    <div className="c-input-text">
       <label htmlFor={name} className="sr-only">
         {label}
       </label>
-      <input id={name} placeholder={placeholder} {...register(name)} />
-      {error && <p>{error}</p>}
+      <input
+        id={name}
+        placeholder={placeholder}
+        {...register(name)}
+        className="c-input-text__input"
+      />
+      {error && <p className="mt-3 error">{error}</p>}
     </div>
   );
 };

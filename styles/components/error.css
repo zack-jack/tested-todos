@@ -1,0 +1,4 @@
+.error {
+  @apply text-red-500;
+  @apply dark:text-red-400;
+}

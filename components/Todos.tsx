@@ -19,7 +19,7 @@ const Todos = ({ todos }: TodosProps): JSX.Element => {
   }
 
   return (
-    <div className="p-10">
+    <div className="px-6 mt-10">
       {todos.map(({ id, description, completed }) => {
         return (
           <Todo
@@ -30,8 +30,8 @@ const Todos = ({ todos }: TodosProps): JSX.Element => {
           />
         );
       })}
-      <div className="mt-6">
-        <p>{`${totalRemaining} remaining`}</p>
+      <div className="px-6 py-4 mt-6">
+        <p className="text-gray-500">{`${totalRemaining} items remaining`}</p>
       </div>
     </div>
   );

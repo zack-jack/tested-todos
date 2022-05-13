@@ -23,7 +23,7 @@ test("todos null state", async () => {
   expect(screen.getByText("No todos")).toBeInTheDocument();
 });
 
-test("todos remaining: 0", async () => {
+test("todo items remaining: 0", async () => {
   render(
     <Todos
       todos={[
@@ -36,10 +36,10 @@ test("todos remaining: 0", async () => {
     />
   );
 
-  expect(screen.getByText("0 remaining")).toBeInTheDocument();
+  expect(screen.getByText("0 items remaining")).toBeInTheDocument();
 });
 
-test("todos remaining: 1", async () => {
+test("todo items remaining: 1", async () => {
   render(
     <Todos
       todos={[
@@ -57,5 +57,5 @@ test("todos remaining: 1", async () => {
     />
   );
 
-  expect(screen.getByText("1 remaining")).toBeInTheDocument();
+  expect(screen.getByText("1 items remaining")).toBeInTheDocument();
 });

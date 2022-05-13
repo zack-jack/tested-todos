@@ -1,0 +1,8 @@
+.c-input-text__input {
+  @apply w-full;
+  @apply px-6 py-4;
+  @apply bg-white;
+  @apply border border-gray-300 rounded-lg;
+  @apply dark:bg-gray-800;
+  @apply dark:border-gray-700;
+}
