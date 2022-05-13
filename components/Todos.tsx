@@ -1,3 +1,4 @@
+import * as React from "react";
 import Todo from "components/Todo";
 
 type TodosProps = {
@@ -5,6 +6,10 @@ type TodosProps = {
 };
 
 const Todos = ({ todos }: TodosProps): JSX.Element => {
+  const totalRemaining: number = React.useMemo(() => {
+    return todos?.filter(({ completed }) => !completed).length;
+  }, [todos]);
+
   if (!todos?.length) {
     return (
       <div>
@@ -25,6 +30,9 @@ const Todos = ({ todos }: TodosProps): JSX.Element => {
           />
         );
       })}
+      <div className="mt-6">
+        <p>{`${totalRemaining} remaining`}</p>
+      </div>
     </div>
   );
 };

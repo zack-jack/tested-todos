@@ -16,7 +16,7 @@ class TodoRepository {
           completed: true,
           userId: true,
         },
-        orderBy: { createdAt: "desc" },
+        orderBy: { id: "desc" },
       });
       return todos;
     } catch (err) {
