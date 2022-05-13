@@ -7,8 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest --watch",
-    "test:unit": "jest"
+    "test": "yarn testdb:up && yarn testdb:migrate && dotenv -e .env.test jest -- --watch",
+    "test:unit": "yarn testdb:up && yarn testdb:migrate && dotenv -e .env.test jest -i",
+    "testdb:migrate": "dotenv -e .env.test -- npx prisma migrate dev --name postgres-init",
+    "testdb:up": "docker-compose up -d",
+    "testdb:down": "docker-compose down",
+    "studio": "dotenv -e .env.local -- npx prisma studio"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
@@ -21,6 +25,7 @@
     "prisma": "^3.14.0",
     "react": "18.1.0",
     "react-dom": "18.1.0",
+    "swr": "^1.3.0",
     "zod": "^3.16.0"
   },
   "devDependencies": {
@@ -30,6 +35,7 @@
     "@types/react": "18.0.9",
     "@types/react-dom": "18.0.3",
     "autoprefixer": "^10.4.7",
+    "dotenv-cli": "^5.1.0",
     "eslint": "8.15.0",
     "eslint-config-next": "12.1.6",
     "jest": "^28.1.0",

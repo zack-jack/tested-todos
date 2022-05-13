@@ -1,4 +1,5 @@
 import type { UserProfile } from "@auth0/nextjs-auth0";
+import Link from "next/link";
 import ThemeToggle from "components/ThemeToggle";
 
 type AppHeaderProps = {
@@ -13,14 +14,14 @@ const AppHeader = ({ user }: AppHeaderProps): JSX.Element => {
         <div className="flex items-center">
           <ThemeToggle />
           {!user && (
-            <a href="/api/auth/login" className="ml-6">
-              Login
-            </a>
+            <Link href="/api/auth/login">
+              <a className="ml-6">Login</a>
+            </Link>
           )}
           {user && (
-            <a href="/api/auth/logout" className="ml-6">
-              Logout
-            </a>
+            <Link href="/api/auth/logout">
+              <a className="ml-6">Logout</a>
+            </Link>
           )}
         </div>
       </div>
