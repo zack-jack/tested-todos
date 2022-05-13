@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { TodoResponse } from "lib/todoRepository";
 import { todoRepository } from "lib/todoRepository";
-import { createTodoInput } from "utils/validators/todo";
+import { createTodoDto } from "utils/validators/todo";
 
 export default async function handler(
   req: NextApiRequest,
@@ -17,7 +17,7 @@ export default async function handler(
     case "POST":
       // Create a new todo
       const { description, userId } = req.body;
-      const { success } = createTodoInput.safeParse({
+      const { success } = createTodoDto.safeParse({
         description,
         userId,
       });

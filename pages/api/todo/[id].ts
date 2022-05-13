@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { todoRepository } from "lib/todoRepository";
-import { updateTodoInput } from "utils/validators/todo";
+import { updateTodoDto } from "utils/validators/todo";
 
 export default async function handler(
   req: NextApiRequest,
@@ -12,7 +12,7 @@ export default async function handler(
     case "PATCH":
       // Toggle todo completed status
       const { completed } = req.body;
-      const { success: isUpdateInputValid } = updateTodoInput.safeParse({
+      const { success: isUpdateInputValid } = updateTodoDto.safeParse({
         completed,
       });
       if (!isUpdateInputValid) {

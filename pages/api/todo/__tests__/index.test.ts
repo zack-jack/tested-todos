@@ -68,11 +68,22 @@ describe("create new todo", () => {
   });
 
   test("valid input", async () => {
-    const newTodo = {
+    const newTodo: TodoResponse = {
+      id: 3,
       description: "test",
+      completed: false,
       userId: "test",
     };
-    const { req, res } = mockRequestResponse({ method: "POST", body: newTodo });
+    jest
+      .spyOn(todoRepository, "create")
+      .mockImplementationOnce(() => Promise.resolve(newTodo));
+    const { req, res } = mockRequestResponse({
+      method: "POST",
+      body: {
+        description: "test",
+        userId: "test",
+      },
+    });
     await handler(req, res);
 
     expect(res.statusCode).toBe(201);

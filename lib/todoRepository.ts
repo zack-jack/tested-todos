@@ -31,13 +31,19 @@ class TodoRepository {
   }: {
     description: string;
     userId: string;
-  }): Promise<Todo | null> {
+  }): Promise<TodoResponse | null> {
     try {
-      const createdTodo: Todo = await prisma.todo.create({
+      const createdTodo: TodoResponse = await prisma.todo.create({
         data: {
           description,
           completed: false,
           userId,
+        },
+        select: {
+          id: true,
+          description: true,
+          completed: true,
+          userId: true,
         },
       });
       return createdTodo;

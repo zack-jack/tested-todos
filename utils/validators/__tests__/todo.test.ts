@@ -1,8 +1,8 @@
-import { createTodoInput, updateTodoInput } from "utils/validators/todo";
+import { createTodoDto, updateTodoDto } from "utils/validators/todo";
 
 describe("create todo input validator", () => {
   test("valid input", () => {
-    const { success } = createTodoInput.safeParse({
+    const { success } = createTodoDto.safeParse({
       description: "test",
       userId: "test",
     });
@@ -11,7 +11,7 @@ describe("create todo input validator", () => {
   });
 
   test("invalid min length input", () => {
-    const { success } = createTodoInput.safeParse({
+    const { success } = createTodoDto.safeParse({
       description: "t",
       userId: "t",
     });
@@ -20,7 +20,7 @@ describe("create todo input validator", () => {
   });
 
   test("invalid max length input", () => {
-    const { success } = createTodoInput.safeParse({
+    const { success } = createTodoDto.safeParse({
       description:
         "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis,.",
       userId:
@@ -31,7 +31,7 @@ describe("create todo input validator", () => {
   });
 
   test("invalid data type input", () => {
-    const { success } = createTodoInput.safeParse({
+    const { success } = createTodoDto.safeParse({
       description: 1,
       userId: 1,
     });
@@ -42,7 +42,7 @@ describe("create todo input validator", () => {
 
 describe("update todo input validator", () => {
   test("valid input", () => {
-    const { success } = updateTodoInput.safeParse({
+    const { success } = updateTodoDto.safeParse({
       completed: true,
     });
 
@@ -50,7 +50,7 @@ describe("update todo input validator", () => {
   });
 
   test("invalid data type input", () => {
-    const { success } = updateTodoInput.safeParse({
+    const { success } = updateTodoDto.safeParse({
       completed: "false",
     });
 
