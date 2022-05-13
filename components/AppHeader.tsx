@@ -10,7 +10,9 @@ const AppHeader = ({ user }: AppHeaderProps): JSX.Element => {
   return (
     <header className="px-6 py-10">
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl tracking-[.3em] uppercase">Todo</h1>
+        <h1 className="text-3xl tracking-[.3em] uppercase leading-none">
+          Todo
+        </h1>
         <div className="flex items-center">
           <ThemeToggle />
           {!user && (

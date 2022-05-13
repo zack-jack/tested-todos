@@ -1,0 +1,47 @@
+.c-input-checkbox {
+  @apply flex items-center;
+  @apply w-full;
+}
+
+.c-input-checkbox__input {
+  @apply bg-white;
+  @apply appearance-none;
+  @apply dark:bg-transparent;
+}
+
+.c-input-checkbox__input[type="checkbox"] {
+  @apply w-6 h-6;
+  @apply rounded-full;
+  @apply ring-blue-100;
+}
+
+/* Checked background gradient */
+.c-input-checkbox__input[type="checkbox"]:checked {
+  @apply text-transparent;
+  @apply bg-gradient-to-br from-cyan-100 to-fuchsia-100;
+}
+
+.c-input-checkbox__label {
+  @apply relative;
+  @apply flex items-center;
+  @apply w-full h-full;
+  @apply p-6;
+  @apply cursor-pointer;
+}
+
+.c-input-checkbox__label-text {
+  @apply h-full;
+}
+
+/* Check mark icon */
+.c-input-checkbox__input[type="checkbox"]:checked
+  + .c-input-checkbox__label-text::before {
+  @apply z-10;
+  @apply absolute top-1/2 left-[1.85rem];
+  @apply -translate-y-1/2;
+  @apply w-3 h-3;
+  content: "";
+  background: url("/assets/icons/icon-check.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}

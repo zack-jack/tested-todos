@@ -22,7 +22,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main id="main" className="min-h-screen bg-gray-100 dark:bg-gray-900">
-        <div className="container mx-auto text-gray-800 dark:text-gray-300">
+        <div className="container max-w-3xl pb-20 mx-auto text-gray-800 dark:text-gray-300">
           <AppHeader user={user || null} />
           <CreateTodoForm />
           <Todos todos={data?.todos || []} />

@@ -1,5 +1,7 @@
 import { mutate } from "swr";
 import * as React from "react";
+import clsx from "clsx";
+import NextImage from "next/image";
 import InputCheckbox from "components/InputCheckbox";
 
 type TodoProps = {
@@ -43,16 +45,30 @@ const Todo = ({ id, description, completed }: TodoProps): JSX.Element => {
     mutate("/api/todo");
   };
 
+  const containerClasses = clsx(
+    "flex items-center",
+    "relative",
+    "bg-white border-b border-gray-300",
+    "first-of-type:rounded-t-lg",
+    "dark:bg-gray-800 dark:border-gray-700"
+  );
+
   return (
-    <div
-      id={`todo-${id}`}
-      className="flex justify-between mt-6 first-of-type:mt-0"
-    >
+    <div id={`todo-${id}`} className={containerClasses}>
       <InputCheckbox checked={completed} handleChange={handleToggleCompleted}>
         <p>{description}</p>
       </InputCheckbox>
-      <button type="button" onClick={handleDelete}>
-        Delete
+      <button
+        type="button"
+        className="absolute flex items-center justify-center right-6"
+        onClick={handleDelete}
+      >
+        <NextImage
+          alt={"Delete icon"}
+          src={`/assets/icons/icon-cross.svg`}
+          width={16}
+          height={16}
+        />
       </button>
     </div>
   );
