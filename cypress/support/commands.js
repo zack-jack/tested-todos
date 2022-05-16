@@ -24,66 +24,43 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-const jwt = require("jsonwebtoken");
+import hkdf from "@panva/hkdf";
+import { EncryptJWT } from "jose";
 
-Cypress.Commands.add("loginViaAuth0", (username, password) => {
-  cy.log(`Logging in as ${username}`);
+// Function logic derived from https://github.com/nextauthjs/next-auth/blob/5c1826a8d1f8d8c2d26959d12375704b0a693bfc/packages/next-auth/src/jwt/index.ts#L113-L121
+async function getDerivedEncryptionKey(secret) {
+  return await hkdf(
+    "sha256",
+    secret,
+    "",
+    "NextAuth.js Generated Encryption Key",
+    32
+  );
+}
 
-  const client_id = Cypress.env("auth0_client_id");
-  const client_secret = Cypress.env("auth0_client_secret");
-  const audience = Cypress.env("auth0_audience");
-  const scope = Cypress.env("auth0_scope");
+// Function logic derived from https://github.com/nextauthjs/next-auth/blob/5c1826a8d1f8d8c2d26959d12375704b0a693bfc/packages/next-auth/src/jwt/index.ts#L16-L25
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export async function encode(token, secret) {
+  const maxAge = 30 * 24 * 60 * 60; // 30 days
+  const encryptionSecret = await getDerivedEncryptionKey(secret);
+  return await new EncryptJWT(token)
+    .setProtectedHeader({ alg: "dir", enc: "A256GCM" })
+    .setIssuedAt()
+    .setExpirationTime(Date.now() / 1000 + maxAge)
+    .setJti("test")
+    .encrypt(encryptionSecret);
+}
 
-  const options = {
-    method: "POST",
-    url: `https://${Cypress.env("auth0_domain")}/oauth/token`,
-    body: {
-      grant_type: "password",
-      username,
-      password,
-      audience,
-      scope,
-      client_id,
-      client_secret,
-    },
-  };
+Cypress.Commands.add("login", () => {
+  cy.intercept("/api/auth/session", { fixture: "session.json" }).as("session");
 
-  cy.request(options).then(({ body }) => {
-    const claims = jwt.decode(body.id_token);
-    const {
-      nickname,
-      name,
-      picture,
-      updated_at,
-      email,
-      email_verified,
-      sub,
-      exp,
-    } = claims;
+  // Generate and set a valid cookie from the fixture that next-auth can decrypt
+  cy.wrap(null)
+    .then(() => cy.fixture("session.json"))
+    .then((sessionJSON) => encode(sessionJSON, Cypress.env("nextauth_secret")))
+    .then((encryptedToken) =>
+      cy.setCookie("next-auth.session-token", encryptedToken)
+    );
 
-    const item = {
-      body: {
-        ...body,
-        decodedToken: {
-          claims,
-          user: {
-            nickname,
-            name,
-            picture,
-            updated_at,
-            email,
-            email_verified,
-            sub,
-          },
-          audience,
-          client_id,
-        },
-      },
-      expiresAt: exp,
-    };
-
-    window.localStorage.setItem("auth0Cypress", JSON.stringify(item));
-
-    cy.visit("/");
-  });
+  Cypress.Cookies.preserveOnce("next-auth.session-token");
 });

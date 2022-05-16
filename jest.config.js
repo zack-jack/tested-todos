@@ -10,6 +10,7 @@ const customJestConfig = {
   // Add more setup options before each test is run
   setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
   moduleDirectories: ["node_modules", "<rootDir>/"],
+  modulePathIgnorePatterns: ["<rootDir>/cypress"],
   testEnvironment: "jest-environment-jsdom",
 };
 

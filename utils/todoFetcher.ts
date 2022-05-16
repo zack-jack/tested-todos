@@ -1,7 +1,10 @@
-export const todoFetcher = (url: string) => {
+export const todoFetcher = async (url: string) => {
   const last = url.split("/").pop();
 
   if (!last || last === "todos") return { todos: [] };
 
-  fetch(url).then((r) => r.json());
+  const res = await fetch(url);
+  const data = await res.json();
+
+  return data;
 };

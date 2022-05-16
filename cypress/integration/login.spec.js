@@ -1,10 +1,7 @@
 describe("user login", () => {
   beforeEach(() => {
-    cy.clearLocalStorage();
-    cy.loginViaAuth0(
-      Cypress.env("auth0_username"),
-      Cypress.env("auth0_password")
-    );
+    cy.login();
+    cy.visit("/");
   });
 
   it("successfully authenticates a user", () => {

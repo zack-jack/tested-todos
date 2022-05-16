@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import AppHeader from "components/AppHeader";
 
 test("unauthenticated user can log in", async () => {
-  render(<AppHeader user={null} />);
+  render(<AppHeader isAuthenticated={false} />);
 
   const loginButton = screen.getByText(/login/i);
 
@@ -10,7 +10,7 @@ test("unauthenticated user can log in", async () => {
 });
 
 test("authenticated user can log out", async () => {
-  render(<AppHeader user={{ sub: "123456789" }} />);
+  render(<AppHeader isAuthenticated={true} />);
 
   const logoutButton = screen.getByText(/logout/i);
 

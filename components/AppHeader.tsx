@@ -1,12 +1,11 @@
-import type { UserProfile } from "@auth0/nextjs-auth0";
-import Link from "next/link";
+import { signIn, signOut } from "next-auth/react";
 import ThemeToggle from "components/ThemeToggle";
 
 type AppHeaderProps = {
-  user: UserProfile | null;
+  isAuthenticated: boolean;
 };
 
-const AppHeader = ({ user }: AppHeaderProps): JSX.Element => {
+const AppHeader = ({ isAuthenticated }: AppHeaderProps): JSX.Element => {
   return (
     <header className="px-6 py-10">
       <div className="flex items-center justify-between">
@@ -15,15 +14,15 @@ const AppHeader = ({ user }: AppHeaderProps): JSX.Element => {
         </h1>
         <div className="flex items-center">
           <ThemeToggle />
-          {!user && (
-            <Link href="/api/auth/login">
-              <a className="ml-6">Login</a>
-            </Link>
+          {!isAuthenticated && (
+            <button type="button" className="ml-6" onClick={() => signIn()}>
+              Login
+            </button>
           )}
-          {user && (
-            <Link href="/api/auth/logout">
-              <a className="ml-6">Logout</a>
-            </Link>
+          {isAuthenticated && (
+            <button type="button" className="ml-6" onClick={() => signOut()}>
+              Logout
+            </button>
           )}
         </div>
       </div>

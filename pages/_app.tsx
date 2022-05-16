@@ -1,14 +1,17 @@
 import type { AppProps } from "next/app";
 import { ThemeProvider } from "next-themes";
-import { UserProvider } from "@auth0/nextjs-auth0";
+import { SessionProvider } from "next-auth/react";
 import "styles/globals.css";
 
-const App = ({ Component, pageProps }: AppProps): JSX.Element => {
+const App = ({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps): JSX.Element => {
   return (
     <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
-      <UserProvider>
+      <SessionProvider session={session}>
         <Component {...pageProps} />
-      </UserProvider>
+      </SessionProvider>
     </ThemeProvider>
   );
 };

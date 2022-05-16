@@ -10,6 +10,6 @@ describe("landing page", () => {
   });
 
   it("renders login button", () => {
-    cy.get("a").contains(/login/i).should("be.visible");
+    cy.contains(/login/i).should("be.visible");
   });
 });

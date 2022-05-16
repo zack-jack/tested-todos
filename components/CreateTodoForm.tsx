@@ -1,4 +1,4 @@
-import { useUser } from "@auth0/nextjs-auth0";
+import { useSession } from "next-auth/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { mutate } from "swr";
@@ -11,7 +11,7 @@ type FormData = {
 };
 
 const CreateTodoForm = () => {
-  const { user } = useUser();
+  const { data: session } = useSession();
   const {
     handleSubmit,
     register,
@@ -23,7 +23,7 @@ const CreateTodoForm = () => {
   const [formError, setFormError] = React.useState<string>("");
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    if (!user?.sub) {
+    if (!session?.user?.id) {
       setFormError("You must be logged in to create a todo");
       return;
     }
@@ -35,7 +35,7 @@ const CreateTodoForm = () => {
       },
       body: JSON.stringify({
         description: data.createTodo,
-        userId: user.sub,
+        userId: session.user.id,
       }),
     });
     const { todo } = await response.json();
@@ -43,7 +43,7 @@ const CreateTodoForm = () => {
       setFormError("Failed to create todo");
     }
 
-    mutate(`/api/todos/${user?.sub || ""}`);
+    mutate(`/api/todos/${session.user.id}`);
     reset();
   };
 

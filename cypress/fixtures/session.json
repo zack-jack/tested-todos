@@ -1,0 +1,10 @@
+{
+  "user": {
+    "id": "6282c2bcef6f4b006ef99eb7",
+    "name": "Han Solo",
+    "email": "cypress@example.com",
+    "image": ""
+  },
+  "expires": "3000-01-01T00:00:00.000Z",
+  "accessToken": "abcdefghijklmnopqrst"
+}
